@@ -12,13 +12,13 @@
     $QueryParam = @{
         Namespace   = $NameSpace
         ClassName   = '__Namespace'
-        ErrorAction = [Management.Automation.ActionPreference]::SilentlyContinue
+        #ErrorAction = [Management.Automation.ActionPreference]::SilentlyContinue
     }
-    $NameSpaceValue = { $this.CimSystemProperties.Namespace }
+    #$NameSpaceValue = { $this.CimSystemProperties.Namespace }
     if ($CimSession) {
         $QueryParam.CimSession = $CimSession
     }
-    $NameSpaceList = Get-CimObject @QueryParam #|
+    $NameSpaceList = Get-CimObject @QueryParam -ErrorAction SilentlyContinue #|
         #Add-Member -MemberType ScriptProperty -Name 'Namespace' -Value $NameSpaceValue -PassThru
     $NameSpaceList
     if ($Recurse.IsPresent) {
