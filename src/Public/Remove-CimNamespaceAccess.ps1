@@ -1,6 +1,4 @@
-﻿#Requires -Version 2
-
-<#
+﻿<#
     .Synopsis
         Removes account from the current security descriptor of a WMI namespace.
     .DESCRIPTION

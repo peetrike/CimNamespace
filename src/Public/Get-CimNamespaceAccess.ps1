@@ -1,6 +1,4 @@
-﻿#Requires -Version 2
-
-<#
+﻿<#
     .SYNOPSIS
         Returns the security descriptor for the CIM NameSpace
     .DESCRIPTION
