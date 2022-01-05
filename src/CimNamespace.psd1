@@ -1,5 +1,5 @@
 ﻿@{
-    RootModule        = 'CimNamespace.psm1'
+    ModuleToProcess   = 'CimNamespace.psm1'
     ModuleVersion     = '0.0.1'
 
     GUID              = '50e1a28c-b1d4-4192-9993-a931198f24d8'
@@ -29,11 +29,11 @@
 
     # Type files (.ps1xml) to be loaded when importing this module
     # Expensive for import time, no more than one should be used.
-    # TypesToProcess = @('CimNamespace.Types.ps1xml')
+    TypesToProcess    = @('CimNamespace.Types.ps1xml')
 
     # Format files (.ps1xml) to be loaded when importing this module.
     # Expensive for import time, no more than one should be used.
-    # FormatsToProcess = @('CimNamespace.Format.ps1xml')
+    FormatsToProcess  = @('CimNamespace.Format.ps1xml')
 
     # Functions to export from this module
     FunctionsToExport = @(
@@ -52,10 +52,17 @@
 
     PrivateData       = @{
         PSData = @{
-            Tags         = @()
+            Tags         = @(
+                'cim'
+                'wmi'
+                'namespace'
+                'PSEdition_Core'
+                'PSEdition_Desktop'
+                'Windows'
+            )
 
             LicenseUri   = ''
-            ProjectUri   = ''
+            ProjectUri   = 'https://github.com/peetrike/cimnamespace'
             ReleaseNotes = ''
 
             # A URL to an icon representing this module.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Types>
+  <Type>
+    <!-- <Name>Microsoft.Management.Infrastructure.CimInstance#ROOT/__NAMESPACE</Name> -->
+    <Name>Microsoft.Management.Infrastructure.CimInstance#__NAMESPACE</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>NameSpace</Name>
+        <GetScriptBlock>$this.CimSystemProperties.Namespace</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <Type>
+    <!-- <Name>System.Management.ManagementObject#ROOT\__NAMESPACE</Name> -->
+    <Name>System.Management.ManagementBaseObject</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Namespace</Name>
+        <ReferencedMemberName>__Namespace</ReferencedMemberName>
+      </AliasProperty>
+    </Members>
+  </Type>
+</Types>
