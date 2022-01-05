@@ -1,6 +1,9 @@
 ﻿# Release folder for build process
 Release/*
 
+# Local files
+local/*
+
 # Excel files
 *.csv
 *.xlsx
