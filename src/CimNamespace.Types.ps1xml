@@ -16,7 +16,7 @@
     <Members>
       <AliasProperty>
         <Name>Namespace</Name>
-        <ReferencedMemberName>__Namespace</ReferencedMemberName>
+        <ReferencedMemberName>__NAMESPACE</ReferencedMemberName>
       </AliasProperty>
     </Members>
   </Type>
