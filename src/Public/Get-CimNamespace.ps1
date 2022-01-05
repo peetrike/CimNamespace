@@ -3,7 +3,7 @@
     param (
             [string]
         $NameSpace = 'ROOT',
-            [cimsession[]]
+            #[CimSession[]]
         $CimSession,
             [switch]
         $Recurse
@@ -18,8 +18,8 @@
     if ($CimSession) {
         $QueryParam.CimSession = $CimSession
     }
-    $NameSpaceList = Get-CimInstance @QueryParam |
-        Add-Member -MemberType ScriptProperty -Name 'Namespace' -Value $NameSpaceValue -PassThru
+    $NameSpaceList = Get-CimObject @QueryParam #|
+        #Add-Member -MemberType ScriptProperty -Name 'Namespace' -Value $NameSpaceValue -PassThru
     $NameSpaceList
     if ($Recurse.IsPresent) {
         ForEach ($n in $NameSpaceList) {
