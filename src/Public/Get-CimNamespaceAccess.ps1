@@ -13,7 +13,7 @@
         Based on blog article
         https://docs.microsoft.com/archive/blogs/wmi/scripting-wmi-namespace-security-part-2-of-3
 #>
-
+function Get-CimNamespaceAccess {
 [CmdletBinding(
     DefaultParameterSetName = 'ComputerName'
 )]
@@ -130,4 +130,5 @@ process {
 
         New-Object PSCustomObject -Property $UserProps
     }
+}
 }

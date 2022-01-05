@@ -16,6 +16,7 @@
         Modified by Graeme Bray
         Original Content by Steve Lee
 #>
+function Remove-CimNamespaceAccess {
 Param (
         [parameter(
             Mandatory=$true,
@@ -129,4 +130,5 @@ Process {
     if ($output.ReturnValue -ne 0) {
         throw ("SetSecurityDescriptor failed: $($output.ReturnValue)" -f $output.ReturnValue)
     }
+}
 }
