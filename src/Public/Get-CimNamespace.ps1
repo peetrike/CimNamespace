@@ -10,9 +10,8 @@
     )
 
     $QueryParam = @{
-        Namespace   = $NameSpace
-        ClassName   = '__Namespace'
-        #ErrorAction = [Management.Automation.ActionPreference]::SilentlyContinue
+        Namespace = $NameSpace
+        ClassName = '__NAMESPACE'
     }
     #$NameSpaceValue = { $this.CimSystemProperties.Namespace }
     if ($CimSession) {
