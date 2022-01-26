@@ -1,4 +1,5 @@
 ﻿function Get-CimNamespace {
+    # .EXTERNALHELP CimNamespace-help.xml
     [CmdletBinding()]
     param (
             [string]
