@@ -38,6 +38,7 @@
     # Functions to export from this module
     FunctionsToExport = @(
         'Get-CimNamespace'
+        'Get-CimNamespaceAccess'
     )
 
     CmdletsToExport   = @()
