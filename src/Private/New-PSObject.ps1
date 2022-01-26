@@ -12,7 +12,7 @@
     )
 
     if ($PSVersionTable.PSVersion.Major -gt 2) {
-        if ($TypeName) { $Props.PSTypeName = $TypeName }
+        if ($TypeName) { $Property.PSTypeName = $TypeName }
         [pscustomobject] $Property
     } else {
         $object = New-Object -TypeName PSObject -Property $Property
