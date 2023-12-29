@@ -18,36 +18,3 @@ foreach ($import in @($Public + $Private)) {
 foreach ($function in $Public) {
     Export-ModuleMember -Function $function.BaseName
 }
-
-#region Shared enums
-
-try {
-    $null = [CimNamespace.Dacl.AccessMask]
-} catch {
-    Add-Type -TypeDefinition @'
-        using System;
-        namespace CimNamespace.Dacl {
-            [Flags]
-            public enum AccessMask {
-                None,
-                Enable        = 0x01,
-                MethodExecute = 0x02,
-                FullWrite     = 0x04,
-                PartialWrite  = 0x08,
-                ProviderWrite = 0x10,
-                RemoteAccess  = 0x20,
-                Subscribe     = 0x40,
-                Publish       = 0x80,
-                ReadSecurity  = 0x20000,
-                WriteSecurity = 0x40000
-            };
-            public enum AceType {
-                Allow,
-                Deny,
-                Audit
-            }
-        }
-'@
-}
-$script:INHERITED_ACE_FLAG = 0x10
-#endregion
