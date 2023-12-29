@@ -3,30 +3,33 @@
     [CmdletBinding(
         DefaultParameterSetName = 'ComputerName'
     )]
-    Param (
+    param (
             [Parameter(
                 Mandatory = $true,
                 Position = 0
             )]
             [string]
         $NameSpace,
-            [parameter(
+
+        #region Common parameters
+            [Parameter(
                 Mandatory = $true,
                 ParameterSetName = 'CimSession'
             )]
             #[CimSession[]]
         $CimSession,
-            [parameter(
+            [Parameter(
                 ParameterSetName = 'ComputerName'
             )]
             [string]
         $ComputerName,
-            [parameter(
+            [Parameter(
                 ParameterSetName = 'ComputerName'
             )]
-            [System.Management.Automation.PSCredential]
-            [System.Management.Automation.Credential()]
-        $Credential = [System.Management.Automation.PSCredential]::Empty
+            [Management.Automation.PSCredential]
+            [Management.Automation.Credential()]
+        $Credential #= [Management.Automation.PSCredential]::Empty
+        #endregion
     )
 
     begin {
@@ -69,7 +72,8 @@
                 AccountName = '{0}\{1}' -f $ace.Trustee.Domain, $ace.Trustee.Name
                 SID         = [Security.Principal.SecurityIdentifier] $ace.Trustee.SidString
                 Type        = [Security.AccessControl.AceType] $ace.AceType
-                Inherited   = ($ace.AceFlags -band [Security.AccessControl.AceFlags]::Inherited) -gt 0
+                AceFlags    = [Security.AccessControl.AceFlags] $ace.AceFlags
+                IsInherited = ($ace.AceFlags -band [Security.AccessControl.AceFlags]::Inherited) -gt 0
                 Permission  = [CimNamespace.Dacl.AccessMask] $ace.AccessMask
             }
 
