@@ -9,7 +9,7 @@ try {
             [Flags]
             public enum AccessMask {
                 None,
-                Enable        = 0x01,
+                EnableAccount = 0x01,
                 MethodExecute = 0x02,
                 FullWrite     = 0x04,
                 PartialWrite  = 0x08,
@@ -23,5 +23,4 @@ try {
         }
 '@
 }
-$script:INHERITED_ACE_FLAG = [Security.AccessControl.AceFlags]::Inherited
 #endregion
