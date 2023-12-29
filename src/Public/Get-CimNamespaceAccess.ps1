@@ -67,9 +67,9 @@
                 #Domain      = $ace.Trustee.Domain
                 #Name        = $ace.Trustee.Name
                 AccountName = '{0}\{1}' -f $ace.Trustee.Domain, $ace.Trustee.Name
-                SID         = [System.Security.Principal.SecurityIdentifier] $ace.Trustee.SidString
-                Type        = [CimNamespace.Dacl.AceType] $ace.AceType
-                Inherited   = ($ace.AceFlags -band $script:INHERITED_ACE_FLAG) -gt 0
+                SID         = [Security.Principal.SecurityIdentifier] $ace.Trustee.SidString
+                Type        = [Security.AccessControl.AceType] $ace.AceType
+                Inherited   = ($ace.AceFlags -band [Security.AccessControl.AceFlags]::Inherited) -gt 0
                 Permission  = [CimNamespace.Dacl.AccessMask] $ace.AccessMask
             }
 
