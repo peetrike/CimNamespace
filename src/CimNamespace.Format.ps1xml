@@ -121,9 +121,9 @@
     </View>
 
     <View>
-      <Name>CimNamespace.DACL</Name>
+      <Name>CimNamespace.ACE</Name>
       <ViewSelectedBy>
-        <TypeName>CimNamespace.DACL</TypeName>
+        <TypeName>CimNamespace.ACE</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

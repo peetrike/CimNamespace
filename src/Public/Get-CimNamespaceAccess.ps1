@@ -73,7 +73,7 @@
                 Permission  = [CimNamespace.Dacl.AccessMask] $ace.AccessMask
             }
 
-            New-PSObject -TypeName 'CimNamespace.DACL' -Property $UserProps
+            New-PSObject -TypeName 'CimNamespace.ACE' -Property $UserProps
         }
     }
 }
