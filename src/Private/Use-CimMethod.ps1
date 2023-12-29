@@ -1,11 +1,8 @@
 ﻿
 function Use-CimMethod {
 
-    [CmdletBinding(
-        DefaultParameterSetName = 'Parameter Set 1'
-    )]
-
-    Param (
+    [CmdletBinding()]
+    param (
             [Parameter(
                 Mandatory = $true,
                 Position = 0
@@ -31,16 +28,13 @@ function Use-CimMethod {
     begin {
         $invokeParams = @{}
         if ($Command = Get-Command Invoke-CimMethod -ErrorAction SilentlyContinue) {
-            $UseCim = $true
             $invokeParams.MethodName = $MethodName
             $invokeParams.ClassName = $ClassName
         } else {
-            $UseCim = $false
             $Command = Get-Command Invoke-WmiMethod
             $invokeParams.Name = $MethodName
             $invokeParams.Class = $ClassName
         }
-
 
         $sessionParams = @{}
 
