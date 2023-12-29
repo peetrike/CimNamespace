@@ -142,7 +142,7 @@
                 <PropertyName>Type</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Inherited</PropertyName>
+                <PropertyName>IsInherited</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Permission</PropertyName>
