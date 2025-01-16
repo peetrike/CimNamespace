@@ -22,7 +22,12 @@
                 Position = 2
             )]
             [CimNamespace.Dacl.AccessMask]
-        $Permission
+        $Permission,
+
+        #region Common parameters
+            [switch]
+        $PassThru
+        #endregion
     )
 
     $invokeParams = @{
@@ -64,5 +69,9 @@
         if ($output.ReturnValue -ne 0) {
             throw ('SetSecurityDescriptor failed: {0}' -f $output.ReturnValue)
         }
+    }
+
+    if ($PassThru) {
+        Get-CimNamespaceAccess -NameSpace $NameSpace
     }
 }
