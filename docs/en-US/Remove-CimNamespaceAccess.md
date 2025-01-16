@@ -14,7 +14,7 @@ Remove permissions from specified CIM namespace
 ## SYNTAX
 
 ```
-Remove-CimNamespaceAccess [-NameSpace] <String> [-Account] <String> [-Permission] <AccessMask> [-PassThru]
+Remove-CimNamespaceAccess [-NameSpace] <String> [-Account] <String> [-Permission <AccessMask>] [-PassThru]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -45,7 +45,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -101,7 +101,7 @@ Accept wildcard characters: False
 
 ### -Permission
 
-Specifies permission to remove.
+Specifies permission to remove.  When permission is not specified, then all account entries are removed.
 
 ```yaml
 Type: AccessMask
@@ -109,8 +109,8 @@ Parameter Sets: (All)
 Aliases:
 Accepted values: None, EnableAccount, MethodExecute, FullWrite, PartialWrite, ProviderWrite, RemoteAccess, Subscribe, Publish, ReadSecurity, WriteSecurity
 
-Required: True
-Position: 2
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
