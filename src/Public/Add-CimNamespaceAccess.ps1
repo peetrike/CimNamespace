@@ -69,7 +69,7 @@
         Descriptor = $acl
     }
 
-    $output = Use-CimMethod -MethodName GetSecurityDescriptor -Arguments $setArguments @invokeParams
+    $output = Use-CimMethod -MethodName SetSecurityDescriptor -Arguments $setArguments @invokeParams
     if ($output.ReturnValue -ne 0) {
         throw ('SetSecurityDescriptor failed: {0}' -f $output.ReturnValue)
     }
