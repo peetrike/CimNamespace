@@ -4,8 +4,6 @@
     param (
             [string]
         $NameSpace = 'ROOT',
-            #[CimSession[]]
-        $CimSession,
             [switch]
         $Recurse
     )
@@ -14,18 +12,13 @@
         Namespace = $NameSpace
         ClassName = '__NAMESPACE'
     }
-    #$NameSpaceValue = { $this.CimSystemProperties.Namespace }
-    if ($CimSession) {
-        $QueryParam.CimSession = $CimSession
-    }
-    $NameSpaceList = Get-CimObject @QueryParam -ErrorAction SilentlyContinue #|
-        #Add-Member -MemberType ScriptProperty -Name 'Namespace' -Value $NameSpaceValue -PassThru
-    $NameSpaceList
-    if ($Recurse.IsPresent) {
-        ForEach ($n in $NameSpaceList) {
-            $QueryParam.Namespace = Join-Path -Path $NameSpace -ChildPath $n.Name
-            $QueryParam.Remove('ClassName')
-            Get-CimNameSpace @QueryParam
+
+    Get-CimObject @QueryParam -ErrorAction SilentlyContinue | Tee-Object -Variable NameSpaceList
+
+    if ($Recurse) {
+        foreach ($n in $NameSpaceList) {
+            $NewNamespace = Join-Path -Path $NameSpace -ChildPath $n.Name
+            Get-CimNameSpace -NameSpace $NewNamespace -Recurse:$Recurse
         }
     }
 }
