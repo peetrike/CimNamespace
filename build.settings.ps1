@@ -1,5 +1,5 @@
 ﻿#Requires -Version 5.1
-#Requires -Modules psake, BuildHelpers
+#Requires -Modules psake
 
 ###############################################################################
 # Customize these properties and tasks for your module.
