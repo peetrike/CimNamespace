@@ -8,17 +8,16 @@
         $Recurse
     )
 
-    $QueryParam = @{
-        Namespace = $NameSpace
-        ClassName = '__NAMESPACE'
-    }
-
-    Get-CimObject @QueryParam -ErrorAction SilentlyContinue | Tee-Object -Variable NameSpaceList
+    $nameSpaceList = $null
+    Get-CimObject -Namespace $NameSpace -ClassName '__NAMESPACE' -ErrorAction SilentlyContinue |
+        Tee-Object -Variable nameSpaceList
 
     if ($Recurse) {
-        foreach ($n in $NameSpaceList) {
-            $NewNamespace = Join-Path -Path $NameSpace -ChildPath $n.Name
-            Get-CimNameSpace -NameSpace $NewNamespace -Recurse:$Recurse
+        foreach ($n in $nameSpaceList) {
+            $name = $n.Name
+            Write-Debug -Message "Processing namespace $name"
+            $NewNamespace = Join-Path -Path $NameSpace -ChildPath $name
+            Get-CimNameSpace -NameSpace $NewNamespace -Recurse
         }
     }
 }
