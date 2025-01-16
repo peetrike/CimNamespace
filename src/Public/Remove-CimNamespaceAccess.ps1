@@ -15,14 +15,10 @@
             [Parameter(
                 Mandatory = $true,
                 ParameterSetName = 'AccountName',
-                Position = 2
+                Position = 1
             )]
             [string]
         $Account,
-            [Parameter(
-                Mandatory = $true,
-                Position = 2
-            )]
             [CimNamespace.Dacl.AccessMask]
         $Permission,
 
@@ -50,14 +46,14 @@
     $win32Account = [Security.Principal.NTAccount] $Account
     $AccountSid = $win32Account.Translate([Security.Principal.SecurityIdentifier]).Value
 
-    $Descriptor.DACL = $Descriptor.DACL | ForEach-Object {
-        if ($_.Trustee.SidString -ne $AccountSid) {
-            $_
-        } else {
-            $newMask = $_.AccessMask - $Permission
+    $Descriptor.DACL = foreach ($ace in $Descriptor.DACL) {
+        if ($ace.Trustee.SidString -ne $AccountSid) {
+            $ace
+        } elseif ($Permission) {
+            $newMask = $ace.AccessMask - $Permission
             if ($newMask -ne 0) {
-                $_.AccessMask = $newMask
-                $_
+                $ace.AccessMask = $newMask
+                $ace
             }
         }
     }
