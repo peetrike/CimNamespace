@@ -42,7 +42,7 @@
         throw ('GetSecurityDescriptor failed: {0}' -f $output.ReturnValue)
     }
 
-    $acl = $output.Descriptor
+    $Descriptor = $output.Descriptor
 
     $win32Account = [Security.Principal.NTAccount] $Account
 
@@ -68,10 +68,10 @@
         }
     }
 
-    $acl.DACL += New-CimObject -ClassName 'win32_Ace' -Property $AceProps
+    $Descriptor.DACL += New-CimObject -ClassName 'win32_Ace' -Property $AceProps
 
     $setArguments = @{
-        Descriptor = $acl
+        Descriptor = $Descriptor
     }
 
     $output = Use-CimMethod -MethodName SetSecurityDescriptor -Arguments $setArguments @invokeParams

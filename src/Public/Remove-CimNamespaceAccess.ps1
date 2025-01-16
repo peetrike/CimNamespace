@@ -43,12 +43,12 @@
         throw "GetSecurityDescriptor failed: $($output.ReturnValue)"
     }
 
-    $acl = $output.Descriptor
+    $Descriptor = $output.Descriptor
 
     $win32Account = [Security.Principal.NTAccount] $Account
     $AccountSid = $win32Account.Translate([Security.Principal.SecurityIdentifier]).Value
 
-    $acl.DACL = $acl.DACL | ForEach-Object {
+    $Descriptor.DACL = $Descriptor.DACL | ForEach-Object {
         if ($_.Trustee.SidString -ne $AccountSid) {
             $_
         } else {
@@ -61,7 +61,7 @@
     }
 
     $SetArguments = @{
-        Descriptor = $acl
+        Descriptor = $Descriptor
     }
 
     if ($PSCmdlet.ShouldProcess($Account)) {
