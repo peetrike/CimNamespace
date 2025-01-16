@@ -1,5 +1,7 @@
 ﻿function Remove-CimNamespaceAccess {
     # .EXTERNALHELP CimNamespace-help.xml
+    [OutputType([void])]
+    [OutputType('CimNamespace.Ace')]
     [CmdletBinding(
         SupportsShouldProcess = $true
     )]

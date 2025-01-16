@@ -1,6 +1,7 @@
 ﻿function Get-CimNamespace {
     # .EXTERNALHELP CimNamespace-help.xml
     [CmdletBinding()]
+    [outputtype('System.Management.ManagementObject#ROOT\cimv2\__NAMESPACE')]
     param (
             [string]
         $NameSpace = 'ROOT',

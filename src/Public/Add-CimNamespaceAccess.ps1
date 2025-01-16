@@ -1,6 +1,8 @@
 ﻿function Add-CimNamespaceAccess {
     # .EXTERNALHELP CimNamespace-help.xml
     [CmdletBinding()]
+    [OutputType([void])]
+    [OutputType('CimNamespace.Ace')]
     param (
             [Parameter(
                 Mandatory = $true,
