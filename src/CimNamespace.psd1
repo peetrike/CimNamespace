@@ -1,6 +1,6 @@
 ﻿@{
     ModuleToProcess   = 'CimNamespace.psm1'
-    ModuleVersion     = '0.0.1'
+    ModuleVersion     = '0.1.0'
 
     GUID              = '50e1a28c-b1d4-4192-9993-a931198f24d8'
 
