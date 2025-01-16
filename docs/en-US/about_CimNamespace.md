@@ -2,65 +2,36 @@
 
 ## about_CimNamespace
 
-```
-ABOUT TOPIC NOTE:
-The first header of the about topic should be the topic name.
-The second header contains the lookup name used by the help system.
-
-IE:
-# Some Help Topic Name
-## SomeHelpTopicFileName
-
-This will be transformed into the text file
-as `about_SomeHelpTopicFileName`.
-Do not include file extensions.
-The second header should have no spaces.
-```
-
 # SHORT DESCRIPTION
 
 Commands managing CIM namespaces
 
-```
-ABOUT TOPIC NOTE:
-About topics can be no longer than 80 characters wide when rendered to text.
-Any topics greater than 80 characters will be automatically wrapped.
-The generated about topic will be encoded UTF-8.
-```
-
 # LONG DESCRIPTION
 
-{{ Long Description Placeholder }}
-
-## Optional Subtopics
-
-{{ Optional Subtopic Placeholder }}
+This module allows to manage CIM namespace access control.
 
 # EXAMPLES
 
-{{ Code or descriptive examples of how to leverage the functions described. }}
+The following example lists ACL of the **root/cimv2** namespace
 
-# NOTE
+```powershell
+Get-CimNamespaceAccess -NameSpace root/cimv2
+```
 
-{{ Note Placeholder - Additional information that a user needs to know.}}
+The following example adds remote execute permission to **root/cimv2** namespace
+to _Remote Management Users_ local group.
 
-# TROUBLESHOOTING NOTE
-
-{{ Troubleshooting Placeholder - Warns users of bugs}}
-
-{{ Explains behavior that is likely to change with fixes }}
+```powershell
+Add-CimNamespaceAccess -NameSpace root/cimv2 -Account 'Remote MAnagement Users' -Permission RemoteAccess
+```
 
 # SEE ALSO
 
-{{ See also placeholder }}
-
-{{ You can also list related articles, blogs, and video URLs. }}
+[Securing WMI Namespaces](https://learn.microsoft.com/windows/win32/wmisdk/securing-wmi-namespaces)
 
 # KEYWORDS
 
-{{List alternate names or titles for this topic that readers might use.}}
-
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
+- CIM
+- WMI
+- Security
+- Access
