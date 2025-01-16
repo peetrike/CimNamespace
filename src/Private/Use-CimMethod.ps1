@@ -1,11 +1,8 @@
-﻿
-function Use-CimMethod {
-
+﻿function Use-CimMethod {
     [CmdletBinding(
-        DefaultParameterSetName = 'Parameter Set 1'
+        SupportsShouldProcess = $true
     )]
-
-    Param (
+    param (
             [Parameter(
                 Mandatory = $true,
                 Position = 0
@@ -25,42 +22,29 @@ function Use-CimMethod {
             )]
             [Alias('Class')]
             [string]
-        $ClassName
+        $ClassName,
+
+            [Collections.IDictionary]
+        $Arguments
     )
 
-    begin {
-        $invokeParams = @{}
-        if ($Command = Get-Command Invoke-CimMethod -ErrorAction SilentlyContinue) {
-            $UseCim = $true
-            $invokeParams.MethodName = $MethodName
-            $invokeParams.ClassName = $ClassName
-        } else {
-            $UseCim = $false
-            $Command = Get-Command Invoke-WmiMethod
-            $invokeParams.Name = $MethodName
-            $invokeParams.Class = $ClassName
+    $invokeParams = @{
+        Namespace = $NameSpace
+    }
+    if ($Command = Get-Command Invoke-CimMethod -ErrorAction SilentlyContinue) {
+        $invokeParams.MethodName = $MethodName
+        $invokeParams.ClassName = $ClassName
+        if ($Arguments) {
+            $invokeParams.Arguments = $Arguments
         }
-
-
-        $sessionParams = @{}
-
-        <# switch ($PSCmdlet.ParameterSetName) {
-            'CimSession' {
-                $invokeParams.CimSession = $CimSession
-            }
-            Default {
-                if ($PSBoundParameters.ContainsKey('Credential')) {
-                    $sessionParams.Credential = $Credential
-                }
-                if ($ComputerName) {
-                        $sessionParams.ComputerName = $ComputerName
-                }
-            }
-        } #>
+    } else {
+        $Command = Get-Command Invoke-WmiMethod
+        $invokeParams.Name = $MethodName
+        $invokeParams.Class = $ClassName
+        if ($Arguments) {
+            $invokeParams.ArgumentList = $Arguments.Values | ForEach-Object { $_.psobject.ImmediateBaseObject }
+        }
     }
 
-    process {
-        $invokeParams.Namespace = $NameSpace
-        & $Command @invokeParams @sessionParams
-    }
+    & $Command @invokeParams
 }

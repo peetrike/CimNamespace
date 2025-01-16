@@ -121,9 +121,9 @@
     </View>
 
     <View>
-      <Name>CimNamespace.DACL</Name>
+      <Name>CimNamespace.ACE</Name>
       <ViewSelectedBy>
-        <TypeName>CimNamespace.DACL</TypeName>
+        <TypeName>CimNamespace.ACE</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -142,7 +142,7 @@
                 <PropertyName>Type</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Inherited</PropertyName>
+                <PropertyName>IsInherited</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Permission</PropertyName>

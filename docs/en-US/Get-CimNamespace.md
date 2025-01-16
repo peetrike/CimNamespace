@@ -8,45 +8,34 @@ schema: 2.0.0
 # Get-CimNamespace
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns CIM namespace list
 
 ## SYNTAX
 
 ```
-Get-CimNamespace [[-NameSpace] <String>] [[-CimSession] <Object>] [-Recurse] [<CommonParameters>]
+Get-CimNamespace [[-NameSpace] <String>] [-Recurse] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+This function returns Access Control List of specified CIM namespace
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Get-CimNamespaceAccess -Namespace 'root/cimv2'
 ```
 
-{{ Add example description here }}
+This function returns the namespaces within **root/cimv2** namespace
 
 ## PARAMETERS
 
-### -CimSession
-{{ Fill CimSession Description }}
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -NameSpace
-{{ Fill NameSpace Description }}
+
+The namespace to operate with
 
 ```yaml
 Type: String
@@ -55,13 +44,14 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: ROOT
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Recurse
-{{ Fill Recurse Description }}
+
+Return contents of specified namespace and child namespaces
 
 ```yaml
 Type: SwitchParameter
@@ -84,7 +74,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Management.ManagementObject#ROOT\cimv2\__NAMESPACE
+
 ## NOTES
 
 ## RELATED LINKS

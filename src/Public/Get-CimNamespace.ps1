@@ -1,31 +1,24 @@
 ﻿function Get-CimNamespace {
     # .EXTERNALHELP CimNamespace-help.xml
     [CmdletBinding()]
+    [outputtype('System.Management.ManagementObject#ROOT\cimv2\__NAMESPACE')]
     param (
             [string]
         $NameSpace = 'ROOT',
-            #[CimSession[]]
-        $CimSession,
             [switch]
         $Recurse
     )
 
-    $QueryParam = @{
-        Namespace = $NameSpace
-        ClassName = '__NAMESPACE'
-    }
-    #$NameSpaceValue = { $this.CimSystemProperties.Namespace }
-    if ($CimSession) {
-        $QueryParam.CimSession = $CimSession
-    }
-    $NameSpaceList = Get-CimObject @QueryParam -ErrorAction SilentlyContinue #|
-        #Add-Member -MemberType ScriptProperty -Name 'Namespace' -Value $NameSpaceValue -PassThru
-    $NameSpaceList
-    if ($Recurse.IsPresent) {
-        ForEach ($n in $NameSpaceList) {
-            $QueryParam.Namespace = Join-Path -Path $NameSpace -ChildPath $n.Name
-            $QueryParam.Remove('ClassName')
-            Get-CimNameSpace @QueryParam
+    $nameSpaceList = $null
+    Get-CimObject -Namespace $NameSpace -ClassName '__NAMESPACE' -ErrorAction SilentlyContinue |
+        Tee-Object -Variable nameSpaceList
+
+    if ($Recurse) {
+        foreach ($n in $nameSpaceList) {
+            $name = $n.Name
+            Write-Debug -Message "Processing namespace $name"
+            $NewNamespace = Join-Path -Path $NameSpace -ChildPath $name
+            Get-CimNameSpace -NameSpace $NewNamespace -Recurse
         }
     }
 }

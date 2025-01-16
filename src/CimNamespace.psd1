@@ -1,6 +1,6 @@
 ﻿@{
     ModuleToProcess   = 'CimNamespace.psm1'
-    ModuleVersion     = '0.0.1'
+    ModuleVersion     = '0.1.0'
 
     GUID              = '50e1a28c-b1d4-4192-9993-a931198f24d8'
 
@@ -37,8 +37,10 @@
 
     # Functions to export from this module
     FunctionsToExport = @(
+        'Add-CimNamespaceAccess'
         'Get-CimNamespace'
         'Get-CimNamespaceAccess'
+        'Remove-CimNamespaceAccess'
     )
 
     CmdletsToExport   = @()
@@ -62,9 +64,9 @@
                 'Windows'
             )
 
-            LicenseUri   = ''
+            LicenseUri   = 'https://github.com/peetrike/CimNamespace/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/peetrike/cimnamespace'
-            ReleaseNotes = ''
+            ReleaseNotes = 'https://github.com/peetrike/CimNamespace/blob/main/CHANGELOG.md'
 
             # A URL to an icon representing this module.
             # IconUri = ''

@@ -1,4 +1,4 @@
-﻿#Requires -Modules psake, BuildHelpers, PWBuild
+﻿#Requires -Modules psake, PWBuild
 
 ##############################################################################
 # This is the PowerShell Module psake build script. It inherits the following

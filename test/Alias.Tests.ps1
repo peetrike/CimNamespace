@@ -1,37 +1,43 @@
-﻿#Requires -Modules BuildHelpers, Pester
+﻿#Requires -Modules Pester
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage(
-    'PSUseDeclaredVarsMoreThanAssigments', '', Scope='*', Target='SuppressImportModule'
-)]
-$SuppressImportModule = $false
-. $PSScriptRoot\Shared.ps1
+BeforeDiscovery {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        'PSUseDeclaredVarsMoreThanAssignments',
+        '',
+        Scope = '*',
+        Target = 'SuppressImportModule'
+    )]
+    $SuppressImportModule = $false
+    . $PSScriptRoot\Shared.ps1
 
-$ModuleInfo = Get-Module $ModuleName
+    $ModuleInfo = Get-Module $ModuleName
 
-$ExportedAlias = foreach ($alias in $ModuleInfo.ExportedAliases.Values) {
-    @{
-        Name = $alias.Name
+    $ExportedAlias = foreach ($alias in $ModuleInfo.ExportedAliases.Values) {
+        @{
+            Name = $alias.Name
+        }
+    }
+    if (-not $ExportedAlias) {
+        $scriptName = Split-Path -Path $PSScriptRoot -Leaf
+        Write-Warning -Message ("{0}: Module {1} ({2}) does not export any aliases." -f $scriptName, $ModuleInfo.Name, $ModuleInfo.Version)
     }
 }
 
-if ($ExportedAlias) {
-    Describe "Testing exported aliases for module $ModuleName" -Tags @('MetaTest') {
+Describe "Exported aliases for module $ModuleName" -Tags @('MetaTest') {
+    Context 'Alias "<name>"' -Foreach $ExportedAlias {
         BeforeEach {
             $aliasToTest = Get-Alias $name -ErrorAction SilentlyContinue
         }
-        It "Alias should exist: <Name>" -TestCases $ExportedAlias {
+        It 'Exists' {
             $aliasToTest | Should -Not -BeNullOrEmpty
         }
 
-        It "Alias should have exported name: <Name>" -TestCases $ExportedAlias {
+        It 'Has exported name' {
             $aliasToTest.Name | Should -Be $Name
         }
 
-        It "Alias should have value: <Name>" -TestCases $ExportedAlias {
+        It 'Has value' {
             $aliasToTest.ResolvedCommandName -or $aliasToTest.Definition | Should -Be $True
         }
     }
-} else {
-    $scriptName = Split-Path -Path $PSScriptRoot -Leaf
-    Write-Warning -Message ("{0}: Module {1} ({2}) does not export any aliases." -f $scriptName, $ModuleInfo.Name, $ModuleInfo.Version)
 }

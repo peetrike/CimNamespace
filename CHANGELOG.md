@@ -15,6 +15,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+## [0.1.0] 2024-01-16
+
+### Changed
+
+All module functions work on PowerShell 2, 5.1 and 7.4
+
 ## [0.0.1] 2022-01-05
 
 ### Added

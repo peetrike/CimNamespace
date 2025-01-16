@@ -8,12 +8,18 @@ Locale: en-US
 
 # CimNamespace Module
 ## Description
-{{ Fill in the Description }}
+Commands managing CIM namespaces
 
 ## CimNamespace Cmdlets
+### [Add-CimNamespaceAccess](Add-CimNamespaceAccess.md)
+Add ACE to the current security descriptor of a CIM namespace.
+
 ### [Get-CimNamespace](Get-CimNamespace.md)
-{{ Fill in the Synopsis }}
+Returns CIM namespace list
 
 ### [Get-CimNamespaceAccess](Get-CimNamespaceAccess.md)
 Returns the security descriptor for the CIM NameSpace
+
+### [Remove-CimNamespaceAccess](Remove-CimNamespaceAccess.md)
+Remove permissions from specified CIM namespace
 
