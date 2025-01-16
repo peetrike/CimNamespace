@@ -46,18 +46,19 @@
     $win32Account = [Security.Principal.NTAccount] $Account
     $AccountSid = $win32Account.Translate([Security.Principal.SecurityIdentifier]).Value
 
-    $Descriptor.DACL = foreach ($ace in $Descriptor.DACL) {
+    $newDACL = foreach ($ace in $Descriptor.DACL) {
         if ($ace.Trustee.SidString -ne $AccountSid) {
-            $ace
+            $ace.psobject.ImmediateBaseObject
         } elseif ($Permission) {
             $newMask = $ace.AccessMask - $Permission
             if ($newMask -ne 0) {
                 $ace.AccessMask = $newMask
-                $ace
+                $ace.psobject.ImmediateBaseObject
             }
         }
     }
 
+    $Descriptor.DACL = $newDACL.psobject.ImmediateBaseObject
     $SetArguments = @{
         Descriptor = $Descriptor
     }

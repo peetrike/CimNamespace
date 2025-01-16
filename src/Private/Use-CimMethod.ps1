@@ -42,7 +42,7 @@
         $invokeParams.Name = $MethodName
         $invokeParams.Class = $ClassName
         if ($Arguments) {
-            $invokeParams.ArgumentList = $Arguments.Values
+            $invokeParams.ArgumentList = $Arguments.Values | ForEach-Object { $_.psobject.ImmediateBaseObject }
         }
     }
 
