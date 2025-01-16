@@ -64,9 +64,9 @@
                 'Windows'
             )
 
-            LicenseUri   = ''
+            LicenseUri   = 'https://github.com/peetrike/CimNamespace/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/peetrike/cimnamespace'
-            ReleaseNotes = ''
+            ReleaseNotes = 'https://github.com/peetrike/CimNamespace/blob/main/CHANGELOG.md'
 
             # A URL to an icon representing this module.
             # IconUri = ''
