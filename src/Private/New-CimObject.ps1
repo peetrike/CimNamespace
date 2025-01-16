@@ -10,7 +10,9 @@
             [string]
         $ClassName,
             [string]
-        $Namespace
+        $Namespace,
+            [Collections.IDictionary]
+        $Property
     )
 
     $CommandParams = @{}
@@ -20,8 +22,18 @@
 
     if (Get-Command New-CimInstance -ErrorAction SilentlyContinue) {
         $CommandParams.ClassName = $ClassName
-        New-CimInstance @CommandParams -ClientOnly
+        New-CimInstance @CommandParams -ClientOnly -Property $Property
     } else {
-        (New-Object System.Management.ManagementClass($ClassName)).CreateInstance()
+        $CimObject = (
+            New-Object System.Management.ManagementClass -ArgumentList (
+                $Namespace,     # Scope
+                $ClassName,     # Path
+                $null           # ObjectGetOptions
+            )
+        ).CreateInstance()
+        foreach ($key in $Property.Keys) {
+            $CimObject.$key = $Property[$key]
+        }
+        $CimObject
     }
 }
