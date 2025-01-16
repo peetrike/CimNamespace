@@ -10,22 +10,17 @@
             [string]
         $Filter,
             [string]
-        $Namespace
+        $Namespace,
+            [string[]]
+        $Property = '*'
     )
 
-    $CommandParams = @{}
-    if ($Namespace) {
-        $CommandParams.Namespace = $Namespace
-    }
-    if ($Filter) {
-        $CommandParams.Filter = $Filter
-    }
+    $query = 'SELECT {0} FROM {1}' -f ($Property -join ','), $ClassName
+    if ($Filter) { $query += ' WHERE {0}' -f $Filter }
 
-    if ($Command = Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
-        $CommandParams.ClassName = $ClassName
-    } else {
-        $CommandParams.Class  = $ClassName
-        $Command = Get-Command Get-WmiObject
-    }
-    & $Command @CommandParams
+    $searcher = [wmisearcher] $query
+
+    if ($Namespace) { $searcher.Scope = [System.Management.ManagementScope] $Namespace }
+
+    $searcher.Get()
 }
