@@ -42,7 +42,7 @@
         <SelectionSetName>WmiNameSpaces</SelectionSetName>
       </ViewSelectedBy>
       <GroupBy>
-        <PropertyName>Namespace</PropertyName>
+        <PropertyName>Parent</PropertyName>
       </GroupBy>
       <TableControl>
         <TableHeaders>
@@ -111,8 +111,7 @@
           <WideEntry>
             <WideItem>
               <ScriptBlock>
-                $Separator = if ($_.GetType().FullName -like '*ManagementObject') { '\' } else { '/' }
-                $_.Namespace, $_.Name -join $Separator
+                $_.Parent, $_.Name -join '\'
               </ScriptBlock>
             </WideItem>
           </WideEntry>

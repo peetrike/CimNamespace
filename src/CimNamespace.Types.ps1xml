@@ -4,20 +4,37 @@
     <!-- <Name>Microsoft.Management.Infrastructure.CimInstance#ROOT/__NAMESPACE</Name> -->
     <Name>Microsoft.Management.Infrastructure.CimInstance#__NAMESPACE</Name>
     <Members>
+      <AliasProperty>
+        <Name>Parent</Name>
+        <ReferencedMemberName>__NAMESPACE</ReferencedMemberName>
+      </AliasProperty>
       <ScriptProperty>
-        <Name>NameSpace</Name>
-        <GetScriptBlock>$this.CimSystemProperties.Namespace</GetScriptBlock>
+        <Name>FullName</Name>
+        <GetScriptBlock>$this.CimSystemProperties.Namespace, $this.Name -join '\'</GetScriptBlock>
       </ScriptProperty>
     </Members>
   </Type>
   <Type>
-    <!-- <Name>System.Management.ManagementObject#ROOT\__NAMESPACE</Name> -->
     <Name>System.Management.ManagementBaseObject</Name>
     <Members>
       <AliasProperty>
-        <Name>Namespace</Name>
+        <Name>Parent</Name>
         <ReferencedMemberName>__NAMESPACE</ReferencedMemberName>
       </AliasProperty>
     </Members>
   </Type>
+    <Type>
+    <Name>System.Management.ManagementObject#__NAMESPACE</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Parent</Name>
+        <ReferencedMemberName>__NAMESPACE</ReferencedMemberName>
+      </AliasProperty>
+      <ScriptProperty>
+        <Name>FullName</Name>
+        <GetScriptBlock>$this.__NAMESPACE, $this.Name -join '\'</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+
 </Types>

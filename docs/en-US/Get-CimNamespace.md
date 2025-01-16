@@ -14,38 +14,38 @@ Returns CIM namespace list
 ## SYNTAX
 
 ```
-Get-CimNamespace [[-NameSpace] <String>] [-Recurse] [<CommonParameters>]
+Get-CimNamespace [[-NameSpace] <String[]>] [-Recurse] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This function returns Access Control List of specified CIM namespace
+This function returns subnamespace list of specified CIM namespace
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-Get-CimNamespaceAccess -Namespace 'root/cimv2'
+Get-CimNamespaceAccess -Namespace 'root'
 ```
 
-This function returns the namespaces within **root/cimv2** namespace
+This function returns the namespaces within **root** namespace
 
 ## PARAMETERS
 
 ### -NameSpace
 
-The namespace to operate with
+Specifies namespaces to operate with
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: FullName
 
 Required: False
 Position: 0
-Default value: ROOT
-Accept pipeline input: False
+Default value: ROOT\cimv2
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -75,6 +75,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Management.ManagementObject#ROOT\cimv2\__NAMESPACE
+
+Collection of namespaces contained inside specified namespaces.
 
 ## NOTES
 
