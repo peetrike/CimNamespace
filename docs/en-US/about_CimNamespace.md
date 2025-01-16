@@ -25,6 +25,11 @@ to _Remote Management Users_ local group.
 Add-CimNamespaceAccess -NameSpace root/cimv2 -Account 'Remote MAnagement Users' -Permission RemoteAccess
 ```
 
+# NOTES
+
+Based on blog article
+https://learn.microsoft.com/archive/blogs/wmi/scripting-wmi-namespace-security-part-2-of-3
+
 # SEE ALSO
 
 [Securing WMI Namespaces](https://learn.microsoft.com/windows/win32/wmisdk/securing-wmi-namespaces)
