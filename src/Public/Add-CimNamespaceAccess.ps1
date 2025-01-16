@@ -50,7 +50,7 @@
         SidString = $win32account.Translate([Security.Principal.SecurityIdentifier]).Value
     }
 
-    $ace = New-CimObject -ClassName 'win32_Ace' -Property @{
+    $AceProps = @{
         AccessMask = [UInt32] $Permission
         AceFlags   = if ($Inherit) {
             [UInt32] (
@@ -68,7 +68,7 @@
         }
     }
 
-    $acl.DACL += $ace
+    $acl.DACL += New-CimObject -ClassName 'win32_Ace' -Property $AceProps
 
     $setArguments = @{
         Descriptor = $acl
