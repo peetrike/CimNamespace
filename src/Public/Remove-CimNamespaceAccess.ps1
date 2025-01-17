@@ -49,12 +49,16 @@
     $newDACL = foreach ($ace in $Descriptor.DACL) {
         if ($ace.Trustee.SidString -ne $AccountSid) {
             $ace.psobject.ImmediateBaseObject
-        } elseif ($Permission) {
-            $newMask = $ace.AccessMask - $Permission
-            if ($newMask -ne 0) {
-                $ace.AccessMask = $newMask
-                $ace.psobject.ImmediateBaseObject
-            }
+            continue
+        }
+        if (-not $Permission) {
+            continue
+        }
+
+        $newMask = $ace.AccessMask - $Permission
+        if ($newMask -ne 0) {
+            $ace.AccessMask = $newMask
+            $ace.psobject.ImmediateBaseObject
         }
     }
 
