@@ -27,7 +27,7 @@
             [string]
         $Query,
             [string]
-        $Namespace = 'ROOT\cimv2'
+        $Namespace
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'Default') {
