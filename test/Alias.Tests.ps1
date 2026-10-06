@@ -24,20 +24,20 @@ BeforeDiscovery {
 }
 
 Describe "Exported aliases for module $ModuleName" -Tags @('MetaTest') {
-    Context 'Alias "<name>"' -Foreach $ExportedAlias {
+    Context 'Alias "<name>"' -Foreach $ExportedAlias -AllowNullOrEmptyForEach {
         BeforeEach {
             $aliasToTest = Get-Alias $name -ErrorAction SilentlyContinue
         }
         It 'Exists' {
-            $aliasToTest | Should -Not -BeNullOrEmpty
+            $aliasToTest | Should-HaveType ([Management.Automation.AliasInfo])
         }
 
         It 'Has exported name' {
-            $aliasToTest.Name | Should -Be $Name
+            $aliasToTest.Name | Should-Be $name
         }
 
-        It 'Has value' {
-            $aliasToTest.ResolvedCommandName -or $aliasToTest.Definition | Should -Be $True
+        It 'Points to existing command' {
+            $aliasToTest.ResolvedCommand | Should-NotBeNull
         }
     }
 }
