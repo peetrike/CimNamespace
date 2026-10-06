@@ -1,24 +1,43 @@
 ﻿function Get-CimObject {
-    [CmdletBinding()]
+    [CmdletBinding(
+        DefaultParameterSetName = 'Default'
+    )]
     param (
-            [parameter(
+            [Parameter(
                 Mandatory = $true,
+                ParameterSetName = 'Default',
                 Position = 0
             )]
             [string]
         $ClassName,
+            [Parameter(
+                ParameterSetName = 'Default'
+            )]
             [string]
         $Filter,
-            [string]
-        $Namespace,
+            [Parameter(
+                ParameterSetName = 'Default'
+            )]
             [string[]]
-        $Property = '*'
+        $Property = '*',
+            [Parameter(
+                Mandatory = $true,
+                ParameterSetName = 'Query'
+            )]
+            [string]
+        $Query,
+            [string]
+        $Namespace = 'ROOT\cimv2'
     )
 
-    $query = 'SELECT {0} FROM {1}' -f ($Property -join ','), $ClassName
-    if ($Filter) { $query += ' WHERE {0}' -f $Filter }
+    if ($PSCmdlet.ParameterSetName -eq 'Default') {
+        $Query = @(
+            'SELECT {0} FROM {1}' -f ($Property -join ','), $ClassName
+            if ($Filter) { 'WHERE {0}' -f $Filter }
+        ) -join ' '
+    }
 
-    $searcher = [wmisearcher] $query
+    $searcher = [wmisearcher] $Query
 
     if ($Namespace) { $searcher.Scope = [System.Management.ManagementScope] $Namespace }
 
